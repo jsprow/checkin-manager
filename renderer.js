@@ -1,5 +1,6 @@
-const fs = require('fs'),
-	path = `${process.env['HOME']}/CheckInManager`,
+const remote = require('electron').remote,
+	path = remote.getGlobal('path'),
+	fs = require('fs'),
 	kioskTxt = `${path}/kiosk.txt`,
 	renderTarget = document.getElementById('renderTarget'),
 	inputBox = document.getElementById('inputBox'),
@@ -9,20 +10,17 @@ const fs = require('fs'),
 	arrow = document.getElementById('arrow'),
 	iframe = document.createElement('iframe')
 
+    console.log(path)
 iframe.id = 'iframe'
 iframe.frameBorder = 0
 
-if (!fs.existsSync(path)) {
-	fs.mkdir(path)
-}
-
 function toggleInputBox() {
-    inputBox.classList.toggle('show')
-    arrow.classList.toggle('down')
+	inputBox.classList.toggle('show')
+	arrow.classList.toggle('down')
 }
 
 arrow.addEventListener('click', () => {
-    toggleInputBox()
+	toggleInputBox()
 })
 
 guidSubmit.addEventListener('click', () => {
@@ -32,43 +30,39 @@ guidSubmit.addEventListener('click', () => {
 checkForKioskTxt()
 
 function checkForKioskTxt() {
-	fs.exists(kioskTxt, e => {
-		if (e) {
-			fs.readFile(kioskTxt, 'utf8', (err, data) => {
-				if (err) throw new Error(err)
-				let guid = data
+	fs.readFile(kioskTxt, 'utf8', (err, data) => {
+		if (err) throw new Error(err)
+		let guid = data
 
-				guidInput.placeholder = guid
+		guidInput.placeholder = guid
 
-				if (guid.match(guidRegex)) {
-					renderCheckinManager(guid)
-				}
-			})
+		if (guid.match(guidRegex)) {
+			renderCheckinManager(guid)
 		}
 	})
 }
 
 function renderCheckinManager(guid) {
-    iframe.src = `https://client.texnrewards.net/kiosktools/default.asp?guid=${guid}`
-    
-    renderTarget.appendChild(iframe)
+	iframe.src = `https://client.texnrewards.net/kiosktools/default.asp?guid=${guid}`
 
-    writeKioskTxt(guid)
+	renderTarget.appendChild(iframe)
+
+	writeKioskTxt(guid)
 }
 
 function writeKioskTxt(guid) {
-    fs.writeFile(kioskTxt, guid, err => {
-        if (err) throw new Error(err)
-    })
+	fs.writeFile(kioskTxt, guid, err => {
+		if (err) throw new Error(err)
+	})
 }
 
 function getGuid() {
-    let guid = guidInput.value
-    
+	let guid = guidInput.value
+
 	if (guid.match(guidRegex)) {
-        renderCheckinManager(guid)
-        guidInput.classList.remove('error')
-    } else {
-        guidInput.classList.add('error')
-    }
+		renderCheckinManager(guid)
+		guidInput.classList.remove('error')
+	} else {
+		guidInput.classList.add('error')
+	}
 }

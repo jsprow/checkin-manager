@@ -1,6 +1,6 @@
 {
   "name": "ivision-checkin-manager-window",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A minimal Electron application that renders the iVision checkin manager",
   "author": "Josh Sprow",
   "main": "main.js",

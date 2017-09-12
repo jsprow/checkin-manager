@@ -1,20 +1,21 @@
-const electron = require('electron')
-// Module to control application life.
-const app = electron.app
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow
-const path = require('path')
-const url = require('url')
+const electron = require('electron'),
+	app = electron.app,
+	BrowserWindow = electron.BrowserWindow,
+	path = require('path'),
+	url = require('url')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
+//get path for writing userData/kiosk.txt
+global.path = app.getPath('userData')
+
 function createWindow() {
 	// Create the browser window.
 	mainWindow = new BrowserWindow({ width: 768, height: 768 })
 
-  // and load the index.html of the app.
+	// and load the index.html of the app.
 	mainWindow.loadURL(
 		url.format({
 			pathname: path.join(__dirname, 'index.html'),
