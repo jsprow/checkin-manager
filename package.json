@@ -5,7 +5,10 @@
   "author": "Josh Sprow",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder -w --ia32",
+    "publish": "electron-builder --draft"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
