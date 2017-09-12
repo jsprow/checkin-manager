@@ -1,0 +1,23 @@
+{
+  "name": "ivision-checkin-manager-window",
+  "version": "1.0.0",
+  "description": "A minimal Electron application that renders the iVision checkin manager",
+  "author": "Josh Sprow",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "~1.6.2",
+    "electron-builder": "^19.27.7"
+  }
+}
