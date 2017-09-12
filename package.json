@@ -7,8 +7,7 @@
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder -w --ia32",
-    "publish": "electron-builder --draft"
+    "dist": "electron-builder -w --ia32"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
